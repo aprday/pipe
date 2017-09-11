@@ -1,41 +1,38 @@
 const fs = require('fs');
 const path = require('path');
 
-function readFilePaths(filePath, reg) {
-    let filePaths = [];
-    const loop = arguments.callee;
+function readFilePath(filePath, reg, callback) {
     const stat = fs.lstatSync(filePath);
     if (stat.isDirectory()) {
         dirs = fs.readdirSync(filePath);
         dirs.forEach(function (dir) {
-            var result = loop(filePath + '/' + dir, reg);
-            filePaths = filePaths.concat(result);
+            readFilePath(filePath + '/' + dir, reg);
         });
     } else {
         if (reg) {
             if (reg.test(filePath)) {
-                filePaths.push(filePath);
+                callback(filePath);
             }
         } else {
-            filePaths.push(filePath);
+            callback(filePath);
         }
     }
-    return filePaths;
 }
-function mkdirs(dirpath, mode, callback) {
-    fs.exists(dirpath, function(exists) {
+
+function mkdirs(dir, mode, callback) {
+    fs.exists(dir, function(exists) {
         if(exists) {
-                callback(dirpath);
+            callback(dir);
         } else {
                 //尝试创建父目录，然后再创建当前目录
-                mkdirs(path.dirname(dirpath), mode, function(){
-                    fs.mkdir(dirpath, mode, callback);
-                });
+            mkdirs(path.dirname(dir), mode, function(){
+                fs.mkdir(dir, mode, callback);
+            });
         }
     });
 };
 
 module.exports = {
-    readFilePaths,
+    readFilePath,
     mkdirs
 }

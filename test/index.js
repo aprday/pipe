@@ -1,9 +1,11 @@
-const cp = require('child_process');
-const spawn = require('cross-spawn');
+const pipe = require('../src/index.js');
 
-console.log('start');
+pipe.match('./test/assert/index.js', /[a-zA-Z]*.js$/g).use(function (file, callback) {
+    const {str, path} = file;
+    callback({str, path});
+}).use(function (file, callback) {
+    const {str, path} = file;
+    callback(str);
+}).dest('./dist/js', '.js');
 
-const r1 = spawn.sync('node', ['work.js'], {stdio: 'inherit'} // eslint-disable-line
-);
-console.log(r1.status);
-process.exit(r1.status);
+pipe.match('./test/assert/index.js').dest('./dist/static');
