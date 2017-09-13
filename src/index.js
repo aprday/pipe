@@ -63,8 +63,8 @@ const Pipe = function () {
 }
 
 Pipe.prototype = {
-    match(src, reg) {
-        return new Task(src, reg, this.descript);
+    match(pattern, reg) {
+        return new Task(pattern, reg, this.descript);
     }
 }
 
