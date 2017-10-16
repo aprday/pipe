@@ -1,0 +1,43 @@
+//- layout.pug
+html
+    head
+        title #{title}
+        link(rel='stylesheet', type='text/css', href='./css/style.css')
+    body
+        #container
+            block header
+            div.underline
+            block content
+                #content.clearfix
+                    if sider
+                        .sider
+                            block sider
+                                if sider.links
+                                    block link
+                                if sider.education
+                                    block education
+                                if sider.programings
+                                    block programing
+                        .main
+                            if experiences
+                                block experience
+                            if internships
+                                block internship
+                            if projects
+                                block project
+                            if skills
+                                block skill
+                    else
+                        if experiences
+                            block experience
+                        if internships
+                            block internship
+                        if projects
+                            block project
+                        if skills
+                            block skill
+                
+            block foot
+                #footer
+                    span.date September 5, 2017
+                    span.descript.center 孙晓旭 · Résumé

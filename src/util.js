@@ -6,7 +6,7 @@ function readFilePath(filePath, reg, callback) {
     if (stat.isDirectory()) {
         dirs = fs.readdirSync(filePath);
         dirs.forEach(function (dir) {
-            readFilePath(filePath + '/' + dir, reg);
+            readFilePath(filePath + '/' + dir, reg, callback);
         });
     } else {
         if (reg) {

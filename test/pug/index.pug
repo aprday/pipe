@@ -1,0 +1,154 @@
+//- index.pug
+extends layout.pug
+
+block link
+    section
+        .heading
+            .text
+                span LINK
+        .subsection
+            - var links = sider.links;
+            .red.github Github
+                - var github = links.github;
+                span.descript : // 
+                    a(href=`${github.link}`) #{github.name}
+            .red.linkedIn LinkedIn
+                - var linkedIn = links.linkedIn;
+                span.descript : //
+                    a(href=`${linkedIn.link}`) #{linkedIn.name}
+            .red.qq QQ
+                - var QQ = links.QQ;
+                span.descript : //
+                    a(href=`${QQ.link}`) #{QQ.name}
+            .red.weixin Weixin
+                - var weixin = links.weixin;
+                span.descript : //
+                    a(href=`${weixin.link}`) #{weixin.name}
+
+block education
+    section
+        .heading
+            .text
+                span EDUCATION
+        .subsection
+            - var education = sider.education;
+            .title.red= education.university
+            .descript= education.major
+            .date= education.date
+
+block programing
+    section
+        .heading
+            .text
+                span PROGRAMING
+        .subsection
+            .programing
+                - var programings = sider.programings;
+                each item in programings
+                    span.language.descript= item
+
+block header
+    section.header
+        .name #{name}
+        .descript.red #{descript}
+        .descript
+            a(href= website,target= '_blank').website.divider #{website}
+            .email.divider #{email}
+            .mobile #{mobile}
+
+
+mixin list(content)
+    if Array.isArray(content)
+        ul.list
+            each list in content
+                li.arrow
+                    +list(list)
+    else
+        span= content
+
+block experience
+    section
+        .heading.underline
+            .text.experience
+                span.red EXP
+                span ERIENCE
+        each item in experiences
+            .subsection
+                span.title.divider= item.title
+                span.descript= item.descript
+                .label
+                    span.date.divider= item.date
+                    span.location.red= item.location
+                br
+                .content
+                    - var content = item.content;
+                    if Array.isArray(content)
+                        ul
+                            each block in content
+                                if typeof block ===  'string'
+                                    li.list-item= block
+                                else
+                                    - var title = block.title;
+                                    - var list  = block.list;
+                                    - var info = block.info;
+                                    - var duty = block.duty;
+                                    li
+                                        h4.list-item= title
+                                        div.info= info
+                                        div.duty= duty
+                                        +list(list)
+                    else
+                        span= content
+                
+
+block internship
+    section
+        .heading.underline
+            .text.internship
+                span.red INT
+                span ERNSHIP
+        each item in internships
+            .subsection
+                span.title.divider= item.title
+                span.descript= item.descript
+                .label
+                    span.date.divider= item.date
+                    span.location.red= item.location
+                br
+                .content
+                    - var content = item.content;
+                    if Array.isArray(content)
+                        ul
+                            each text in content
+                                li.list-item= text
+                    else
+                        span= content
+block project
+    section
+        .heading.underline
+            .text.project
+                span.red PRO
+                span JECT
+        each item in projects
+            .subsection
+                span.title.divider= item.title
+                a(href= item.descript, target= '_blank').descript= item.descript
+                .content
+                    - var content = item.content;
+                    if Array.isArray(content)
+                        ul
+                            each text in content
+                                li.list-item= text
+                    else
+                        span= content
+
+block skill
+    section
+        .heading.underline
+            .text.skill
+                span.red SKI
+                span LL
+        .subsection
+            ul
+                each item in skills
+                    li.point= item

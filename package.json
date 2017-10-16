@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/luciijs/pipe#readme",
   "devDependencies": {
-    "babel-cli": "^6.24.1"
+    "babel-cli": "^6.24.1",
+    "koa": "^2.3.0",
+    "jade": "^1.11.0",
+    "less": "^2.7.2",
+    "pug": "^2.0.0-rc.3"
   }
 }
