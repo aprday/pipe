@@ -20,4 +20,4 @@ pipe.match('./pug/index.pug').use(function (file, callback) {
 
 pipe.match('./assert/').dest('./dist/static');
 
-pipe.server(__dirname, 3000);
+// pipe.server(__dirname, 3000);
